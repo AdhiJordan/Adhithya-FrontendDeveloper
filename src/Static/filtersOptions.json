@@ -1,0 +1,18 @@
+[
+    {
+        "label": "All Launches",
+        "value": "All Launches"
+    },
+    {
+        "label": "Upcoming Launches",
+        "value": "Upcoming Launches"
+    },
+    {
+        "label": "Successfull Launches",
+        "value": "Successfull Launches"
+    },
+    {
+        "label": "Failed Launches",
+        "value": "Failed Launches"
+    }
+]

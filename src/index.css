@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App{
+  overflow: hidden;
+}
+.skrate_logo{
+  width: 200px;
+  height: 200px;
+}
+.loginProcedureImageCls{
+  position: relative;
+  bottom: 80px;
+  left: 100px;
+}
+.boxContainer{
+  background: #FFFFFF;
+  border: 1px solid #FDFDFD;
+  box-shadow: 0px 0px 2px rgb(0 0 0 / 25%);
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+.blueBoxContainer {
+    background: #F6F7FF;
+    border-radius: 5px;
+    padding: 20px;
+}
+.sessionProfileImage{
+  position: relative;
+  bottom: 34px;
+  left: 10px;
+}

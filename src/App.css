@@ -1,0 +1,130 @@
+.text-align-left {
+    text-align: left;
+}
+
+.padding-30 {
+    padding: 30px;
+}
+.float-right {
+    float: right;
+}
+
+.height-38 {
+    height: 38%;
+}
+.margin-top-0 {
+    margin-top: 0px;
+}
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-top-30 {
+    margin-top: 30px;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.margin-left-30 {
+    margin-left: 30px;
+}
+.float-right {
+    float: right;
+}
+
+.color-blue {
+    color: #4f65f6;
+    font-size: 26px;
+    float: right;
+    position: relative;
+    bottom: 7px;
+}
+
+.gridBox {
+    border: 1px solid #e3e3e3;
+    border-radius: 10px;
+}
+.text-center {
+    text-align: center;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+.padding-20-40 {
+    padding: 20px 40px;
+}
+
+.iconDetails {
+    margin: 0 2%;
+    float: left;
+}
+.container2 {
+    width: 100%;
+    height: auto;
+    padding: 1%;
+}
+.text {
+    float: left;
+}
+.text h4,
+.text p {
+    width: 100%;
+    float: left;
+    font-size: 0.6em;
+}
+
+.failureCls {
+    color: red;
+    background: lightsalmon;
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 8px;
+}
+
+.successCls {
+    color: green;
+    background: lightblue;
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 8px;
+}
+
+.flex-width-100 {
+    width: 100%;
+    display: flex;
+}
+
+.calendarOptions {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16;
+    color: #262735;
+    cursor: pointer;
+}
+
+.calendarAction {
+    top: 46;
+    left: 120px;
+    width: 261px;
+    padding: 10px 20px;
+    z-index: 111111;
+    position: absolute;
+    box-shadow: rgb(0 0 0 / 20%) 0px 5px 5px -3px,
+        rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 8px 8px 2px;
+    border-radius: 0;
+}
