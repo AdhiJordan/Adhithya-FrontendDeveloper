@@ -1,30 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import Paper from '@mui/material/Paper';
-import Pagination from '../../Pagination/Pagination';
-import headerDetails from './../../../Static/headers.json';
 import Modal from './../../Modal';
 import axios from 'axios';
 import moment from 'moment';
 
 const Launch = ({ setTableData }) => {
-    const [rowDetails, setRowDetails] = useState([]);
-    const [overallData, setOverallData] = useState(0);
-    const [paginationIndex, setPaginationIndex] = useState(0);
-    const [page, setPage] = useState(0);
+    const [page] = useState(0);
     const [rowsPerPage] = useState(20);
     const [toggleModal, setToggleModal] = useState(false);
     const [launchDetails, setLaunchDetails] = useState(null);
-
-    const getPageDetails = (data) => {
-        setPage(data);
-        setPaginationIndex(data);
-    };
 
     const getLauchDetails = (data) => {
         axios

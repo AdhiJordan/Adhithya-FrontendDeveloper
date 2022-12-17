@@ -7,8 +7,6 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 const SortByDateDashboard = (props) => {
     const [value, setValue] = useState([]);
     const [toggleCustom, setToggleCustom] = useState(false);
-    const [openCalendar, setOpenCalendar] = useState(false);
-    const [dates, setDates] = useState([]);
 
     useEffect(() => {
         let today = new Date();
@@ -17,39 +15,6 @@ const SortByDateDashboard = (props) => {
         let previousDate = new Date(today.toISOString());
         setValue([previousDate, currentDate]);
     }, []);
-
-    const handleChange = (ranges) => {
-        setValue([ranges[0], ranges[1]]);
-    };
-    const handleSelect = (values) => {
-        const date = new Date(values.toISOString());
-        setDates((arr) => [...arr, date]);
-    };
-
-    const sendConfirmedDates = () => {
-        setValue([dates[0], dates[1]]);
-        props.userDateSelectedRange([
-            moment(dates[0]).format('YYYY-MM-DD'),
-            moment(dates[1]).format('YYYY-MM-DD'),
-        ]);
-        setOpenCalendar(false);
-    };
-
-    const backToDefault = () => {
-        let today = new Date();
-        let currentDate = new Date(today.toISOString());
-        today.setMonth(today.getMonth() - 1);
-        let previousDate = new Date(today.toISOString());
-        setValue([previousDate, currentDate]);
-        setDates([]);
-        props.userDateSelectedRange([null, null]);
-        setOpenCalendar(false);
-    };
-
-    const customSelection = () => {
-        setToggleCustom(false);
-        setOpenCalendar(true);
-    };
 
     const selectDateRange = (data) => {
         if (data === 'Last 15 years') {

@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TableComponent from '../Components/Table';
 import Grid from '@mui/material/Grid';
-import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import SortBySelect from '../Components/SortBySelect';
 import filterOptions from './../Static/filtersOptions.json';
 import Loaders from '../Components/Loaders';
@@ -12,7 +10,7 @@ import {
     getLaunchList,
     getLaunchByFiltersQuery,
     getQueryURL,
-    resetAll,
+    //resetAll,
 } from './../store/actions/launch';
 import { connect, useDispatch } from 'react-redux';
 import headerDetails from './../Static/headers.json';
@@ -33,19 +31,10 @@ function createData(id, launchedAt, location, mission, orbit, status, rocket) {
     };
 }
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
-
 const Dashboard = ({ launchDetails }) => {
     const [getLaunchDetails, setLaunchDetails] = useState([]);
     const [launchCount, setLaunchCount] = useState(0);
     const [paginationIndex, setPaginationIndex] = useState(1);
-    const [order, setOrder] = useState('DESC');
     const [emptyLaunchList, setEmptyLaunchList] = useState(false);
     const [queryFilters, setQueryFilters] = useState({
         limit: 10,
@@ -61,6 +50,8 @@ const Dashboard = ({ launchDetails }) => {
     const getInitialData = () => {
         dispatch(getLaunchList());
         //queryUrlParams(window.location.search);
+
+        //process.env.REACT_APP_API_BASE_URL
         axios
             .get(`https://api.spacexdata.com/v3/launches/?&offset=0&order=`)
             .then((res) => {
@@ -354,7 +345,8 @@ const Dashboard = ({ launchDetails }) => {
                             </Grid>
                             <Grid item xs={12} sm={12} md={5} lg={5}>
                                 <TextField
-                                    id="outlined-basic"
+                                    data-testid="searchByOrbit"
+                                    id="Search_orbit"
                                     label="Search by Orbit"
                                     variant="outlined"
                                     value={queryFilters.orbit}
@@ -377,6 +369,7 @@ const Dashboard = ({ launchDetails }) => {
                                     onChange={handleChange}
                                 />
                                 <Button
+                                    data-testid="searchByOrbitButton"
                                     variant="contained"
                                     style={{
                                         margin: '14px 10px 0px 10px',

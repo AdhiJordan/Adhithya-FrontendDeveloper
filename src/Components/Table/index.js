@@ -18,7 +18,6 @@ const TableComponent = ({
     paginationIndex,
 }) => {
     const [rowDetails, setRowDetails] = useState([]);
-    const [overallData, setOverallData] = useState(setTableData.length);
     const [page, setPage] = useState(0);
     const [rowsPerPage] = useState(10);
 
@@ -29,7 +28,6 @@ const TableComponent = ({
 
     useEffect(() => {
         setRowDetails(setTableData);
-        setOverallData(setTableData.length);
     }, [setTableData]);
 
     console.log('launchCount', launchCount);

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Grid from '@mui/material/Grid';
 
 const HeaderSection = styled('div')(({ theme }) => ({
     textAlign: 'center',
