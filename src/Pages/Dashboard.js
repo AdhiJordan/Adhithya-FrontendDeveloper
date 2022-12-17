@@ -17,6 +17,9 @@ import {
 import { connect, useDispatch } from 'react-redux';
 import headerDetails from './../Static/headers.json';
 import SortByDateDashboard from '../Components/SortByDateDashboard';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Home from './Home';
 
 function createData(id, launchedAt, location, mission, orbit, status, rocket) {
     return {
@@ -51,10 +54,11 @@ const Dashboard = ({ launchDetails }) => {
         launch_type: '',
         launchStartDateFilter: '',
         launchEndDateFilter: '',
+        orbit: '',
     });
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    const getInitialData = () => {
         dispatch(getLaunchList());
         //queryUrlParams(window.location.search);
         axios
@@ -64,6 +68,10 @@ const Dashboard = ({ launchDetails }) => {
                     setLaunchCount(res.data.length);
                 }
             });
+    };
+
+    useEffect(() => {
+        getInitialData();
     }, []);
 
     useEffect(() => {
@@ -112,6 +120,7 @@ const Dashboard = ({ launchDetails }) => {
             launch_type: queryFilters.launch_type,
             launchStartDateFilter: '',
             launchEndDateFilter: '',
+            orbit: queryFilters.orbit,
         };
         if (index * 10 < launchCount) {
             setPaginationIndex(index + 1);
@@ -133,6 +142,7 @@ const Dashboard = ({ launchDetails }) => {
             launch_type: queryUrl.launch_type,
             launchStartDateFilter: '',
             launchEndDateFilter: '',
+            orbit: queryUrl.orbit,
         }));
     };
 
@@ -146,6 +156,7 @@ const Dashboard = ({ launchDetails }) => {
             launch_type: '',
             launchStartDateFilter: '',
             launchEndDateFilter: '',
+            orbit: '',
         };
 
         if (data === 'Successfull Launches') {
@@ -171,6 +182,7 @@ const Dashboard = ({ launchDetails }) => {
             launch_type: queryUrl.launch_type,
             launchStartDateFilter: queryUrl.launchStartDateFilter,
             launchEndDateFilter: queryUrl.launchEndDateFilter,
+            orbit: queryUrl.orbit,
         }));
 
         axios
@@ -178,8 +190,8 @@ const Dashboard = ({ launchDetails }) => {
                 queryUrl.launch_type
                     ? `https://api.spacexdata.com/v3/launches/` +
                           queryUrl.launch_type +
-                          `/?&offset=0&order=launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}`
-                    : `https://api.spacexdata.com/v3/launches/?&offset=0&order=&launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}`
+                          `/?&offset=0&order=launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}&orbit=${queryUrl.orbit}`
+                    : `https://api.spacexdata.com/v3/launches/?&offset=0&order=&launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}&orbit=${queryUrl.orbit}`
             )
             .then((res) => {
                 if (res) {
@@ -188,8 +200,62 @@ const Dashboard = ({ launchDetails }) => {
             });
     };
 
+    const handleChange = (event) => {
+        let queryUrl = {
+            limit: 10,
+            offset: 0,
+            launch_success: '',
+            launch_type: '',
+            launchStartDateFilter: '',
+            launchEndDateFilter: '',
+            orbit: '',
+        };
+        queryUrl['orbit'] = event.target.value;
+        setQueryFilters((queryFilters) => ({
+            ...queryFilters,
+            limit: queryUrl.limit,
+            offset: queryUrl.offset,
+            launch_success: queryUrl.launch_success,
+            launch_type: queryUrl.launch_type,
+            launchStartDateFilter: '',
+            launchEndDateFilter: '',
+            orbit: queryUrl.orbit,
+        }));
+    };
+
+    const handleSearch = () => {
+        dispatch(getLaunchByFiltersQuery(queryFilters));
+        axios
+            .get(
+                queryFilters.launch_type
+                    ? `https://api.spacexdata.com/v3/launches/` +
+                          queryFilters.launch_type +
+                          `/?&limit=10&offset=${queryFilters.offset}&order=launch_success=${queryFilters.launch_success}&start=${queryFilters.launchStartDateFilter}&end=${queryFilters.launchEndDateFilter}&orbit=${queryFilters.orbit}`
+                    : `https://api.spacexdata.com/v3/launches/?&limit=10&offset=${queryFilters.offset}&order=&launch_success=${queryFilters.launch_success}&start=${queryFilters.launchStartDateFilter}&end=${queryFilters.launchEndDateFilter}&orbit=${queryFilters.orbit}`
+            )
+            .then((res) => {
+                if (res) {
+                    setLaunchCount(res.data.length);
+                }
+            });
+    };
+
+    const handleReset = () => {
+        setQueryFilters((queryFilters) => ({
+            ...queryFilters,
+            limit: 10,
+            offset: 0,
+            launch_success: '',
+            launch_type: '',
+            launchStartDateFilter: '',
+            launchEndDateFilter: '',
+            orbit: '',
+        }));
+        getInitialData();
+    };
+
     useEffect(() => {
-        let queryUrl = `?limit=${queryFilters.limit}&offset=${queryFilters.offset}&launch_success=${queryFilters.launch_success}&launch_type=${queryFilters.launch_type}&start=${queryFilters.launchStartDateFilter}&end=${queryFilters.launchEndDateFilter}`;
+        let queryUrl = `?limit=${queryFilters.limit}&offset=${queryFilters.offset}&launch_success=${queryFilters.launch_success}&launch_type=${queryFilters.launch_type}&start=${queryFilters.launchStartDateFilter}&end=${queryFilters.launchEndDateFilter}&orbit=${queryFilters.orbit}`;
         window.history.replaceState(
             {
                 foo: 'bar',
@@ -265,14 +331,13 @@ const Dashboard = ({ launchDetails }) => {
 
     return (
         <div>
+            <Home />
             <div className="margin-bottom-30">
-                <h1 className="text-center">Space X</h1>
-                <hr />
                 <div className="margin-bottom-30">
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={1} lg={1}></Grid>
-                            <Grid item xs={12} sm={12} md={3} lg={3}>
+                            <Grid item xs={12} sm={12} md={2} lg={2}>
                                 <div className="margin-top-20">
                                     <SortByDateDashboard
                                         userDateSelectedRange={
@@ -281,14 +346,55 @@ const Dashboard = ({ launchDetails }) => {
                                     />
                                 </div>
                             </Grid>
-                            <Grid item xs={12} sm={12} md={4} lg={4}></Grid>
                             <Grid item xs={12} sm={12} md={3} lg={3}>
                                 <SortBySelect
                                     sortByOptions={filterOptions}
                                     userSelectedValue={getUserSelectedValue}
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={12} md={1} lg={1}></Grid>
+                            <Grid item xs={12} sm={12} md={5} lg={5}>
+                                <TextField
+                                    id="outlined-basic"
+                                    label="Search by Orbit"
+                                    variant="outlined"
+                                    value={queryFilters.orbit}
+                                    className="searchOrbitCls"
+                                    InputProps={{
+                                        style: {
+                                            height: 45,
+                                            margin: '10px 10px 0px 10px',
+                                            paddingTop: 10,
+                                        },
+                                    }}
+                                    InputLabelProps={{
+                                        style: {
+                                            textOverflow: 'ellipsis',
+                                            whiteSpace: 'nowrap',
+                                            overflow: 'hidden',
+                                            margin: '8px 0px 0px 8px',
+                                        },
+                                    }}
+                                    onChange={handleChange}
+                                />
+                                <Button
+                                    variant="contained"
+                                    style={{
+                                        margin: '14px 10px 0px 10px',
+                                    }}
+                                    onClick={handleSearch}
+                                >
+                                    Search
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    style={{
+                                        margin: '14px 0px 0px 10px',
+                                    }}
+                                    onClick={handleReset}
+                                >
+                                    Reset
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Box>
                 </div>

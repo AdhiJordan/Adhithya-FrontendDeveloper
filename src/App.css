@@ -128,3 +128,12 @@
         rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 8px 8px 2px;
     border-radius: 0;
 }
+
+.searchOrbitCls {
+    height: 45px;
+    width: 65%;
+}
+.searchButton {
+    margin-top: 10px;
+    margin-right: 20px;
+}

@@ -2,7 +2,7 @@ import HttpClient from './HttpRequest';
 
 export async function getLaunchDetails() {
     return HttpClient.get(
-        `https://api.spacexdata.com/v3/launches/?limit=10&offset=0&order=&start=&end`
+        `https://api.spacexdata.com/v3/launches/?limit=10&offset=0&order=&start=&end=&orbit=`
     );
 }
 
@@ -13,14 +13,14 @@ export async function getLaunchByFiltersQueryDetails(params) {
     if (Number(obj.offset) === 1) {
         return HttpClient.get(
             obj.launch_type
-                ? `https://api.spacexdata.com/v3/launches/${obj.launch_type}?limit=${obj.limit}&offset=0&order=&launch_success=${obj.launch_success}&start=${obj.launchStartDateFilter}&end=${obj.launchEndDateFilter}`
+                ? `https://api.spacexdata.com/v3/launches/${obj.launch_type}?limit=${obj.limit}&offset=0&order=&launch_success=${obj.launch_success}&start=${obj.launchStartDateFilter}&end=${obj.launchEndDateFilter}&orbit=${obj.orbit}`
                 : `https://api.spacexdata.com/v3/launches/?limit=${obj.limit}&offset=0&order=&launch_success=${obj.launch_success}&start=${obj.launchStartDateFilter}&end=${obj.launchEndDateFilter}`
         );
     } else if (Number(obj.offset) === 0) {
         return HttpClient.get(
             obj.launch_type
-                ? `https://api.spacexdata.com/v3/launches/${obj.launch_type}?limit=${obj.limit}&offset=0&order=&launch_success=${obj.launch_success}&start=${obj.launchStartDateFilter}&end=${obj.launchEndDateFilter}`
-                : `https://api.spacexdata.com/v3/launches/?limit=${obj.limit}&offset=0&order=&launch_success=${obj.launch_success}&start=${obj.launchStartDateFilter}&end=${obj.launchEndDateFilter}`
+                ? `https://api.spacexdata.com/v3/launches/${obj.launch_type}?limit=${obj.limit}&offset=0&order=&launch_success=${obj.launch_success}&start=${obj.launchStartDateFilter}&end=${obj.launchEndDateFilter}&orbit=${obj.orbit}`
+                : `https://api.spacexdata.com/v3/launches/?limit=${obj.limit}&offset=0&order=&launch_success=${obj.launch_success}&start=${obj.launchStartDateFilter}&end=${obj.launchEndDateFilter}&orbit=${obj.orbit}`
         );
     } else if (Number(obj.offset) > 0) {
         return HttpClient.get(
@@ -31,14 +31,14 @@ export async function getLaunchByFiltersQueryDetails(params) {
                       (Number(obj.offset) - 1) * 10
                   }&order=&launch_success=${obj.launch_success}&start=${
                       obj.launchStartDateFilter
-                  }&end=${obj.launchEndDateFilter}`
+                  }&end=${obj.launchEndDateFilter}&orbit=${obj.orbit}`
                 : `https://api.spacexdata.com/v3/launches/?limit=${
                       obj.limit
                   }&offset=${
                       (Number(obj.offset) - 1) * 10
                   }&order=&launch_success=${obj.launch_success}&start=${
                       obj.launchStartDateFilter
-                  }&end=${obj.launchEndDateFilter}`
+                  }&end=${obj.launchEndDateFilter}&orbit=${obj.orbit}`
         );
     }
 }
