@@ -332,7 +332,7 @@ const Dashboard = ({ launchDetails }) => {
     return (
         <div>
             <Home />
-            <div className="margin-bottom-30">
+            <div className="margin-top-50 margin-bottom-30">
                 <div className="margin-bottom-30">
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container>
@@ -441,6 +441,14 @@ const Dashboard = ({ launchDetails }) => {
                         <Grid item xs={12} sm={12} md={1} lg={1}></Grid>
                     </Grid>
                 </Box>
+            </div>
+            <div className="margin-top-50">
+                <img
+                    src="/assets/images/shuttle.jpeg"
+                    alt="Space X"
+                    width="100%"
+                    height="100%"
+                />
             </div>
         </div>
     );
