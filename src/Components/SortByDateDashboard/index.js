@@ -52,10 +52,10 @@ const SortByDateDashboard = (props) => {
     };
 
     const selectDateRange = (data) => {
-        if (data === 'Last Month') {
+        if (data === 'Last 15 years') {
             let today = new Date();
             let currentDate = new Date(today.toISOString());
-            today.setMonth(today.getMonth() - 1);
+            today.setMonth(today.getMonth() - 180);
             let previousDate = new Date(today.toISOString());
 
             props.userDateSelectedRange([
@@ -63,30 +63,30 @@ const SortByDateDashboard = (props) => {
                 moment(currentDate).format('YYYY-MM-DD'),
             ]);
             setValue([previousDate, currentDate]);
-        } else if (data === 'Last 3 Months') {
+        } else if (data === 'Last 20 years') {
             let today = new Date();
             let currentDate = new Date(today.toISOString());
-            today.setMonth(today.getMonth() - 3);
+            today.setMonth(today.getMonth() - 240);
             let previousDate = new Date(today.toISOString());
             props.userDateSelectedRange([
                 moment(previousDate).format('YYYY-MM-DD'),
                 moment(currentDate).format('YYYY-MM-DD'),
             ]);
             setValue([previousDate, currentDate]);
-        } else if (data === 'Last Week') {
+        } else if (data === 'Last 10 years') {
             let dateToday = new Date();
             let currentDate = new Date(dateToday.toISOString());
-            dateToday.setDate(dateToday.getDate() - 7);
+            dateToday.setDate(dateToday.getMonth() - 120);
             let previousDate = new Date(dateToday.toISOString());
             props.userDateSelectedRange([
                 moment(previousDate).format('YYYY-MM-DD'),
                 moment(currentDate).format('YYYY-MM-DD'),
             ]);
             setValue([previousDate, currentDate]);
-        } else if (data === 'Last Day') {
+        } else if (data === 'Last 5 years') {
             let presentDate = new Date();
             let currentDate = new Date(presentDate.toISOString());
-            presentDate.setDate(presentDate.getDate() - 1);
+            presentDate.setDate(presentDate.getMonth() - 60);
             let previousDate = new Date(presentDate.toISOString());
             props.userDateSelectedRange([
                 moment(previousDate).format('YYYY-MM-DD'),
@@ -110,27 +110,27 @@ const SortByDateDashboard = (props) => {
                         <Paper className="calendarAction">
                             <p
                                 className="calendarOptions"
-                                onClick={() => selectDateRange('Last Day')}
+                                onClick={() => selectDateRange('Last 5 years')}
                             >
-                                In Last Day
+                                In Last 5 years
                             </p>
                             <p
                                 className="calendarOptions"
-                                onClick={() => selectDateRange('Last Week')}
+                                onClick={() => selectDateRange('Last 10 years')}
                             >
-                                Last Week
+                                Last 10 years
                             </p>
                             <p
                                 className="calendarOptions"
-                                onClick={() => selectDateRange('Last Month')}
+                                onClick={() => selectDateRange('Last 15 years')}
                             >
-                                Last Month
+                                Last 15 years
                             </p>
                             <p
                                 className="calendarOptions"
-                                onClick={() => selectDateRange('Last 3 Months')}
+                                onClick={() => selectDateRange('Last 20 years')}
                             >
-                                Last 3 Months
+                                Last 20 years
                             </p>
                         </Paper>
                     </div>
