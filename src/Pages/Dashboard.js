@@ -53,7 +53,7 @@ const Dashboard = ({ launchDetails }) => {
 
         //process.env.REACT_APP_API_BASE_URL
         axios
-            .get(`https://api.spacexdata.com/v3/launches/?&offset=0&order=`)
+            .get(process.env.REACT_APP_API_BASE_URL + `/?&offset=0&order=`)
             .then((res) => {
                 if (res) {
                     setLaunchCount(res.data.length);
@@ -179,10 +179,12 @@ const Dashboard = ({ launchDetails }) => {
         axios
             .get(
                 queryUrl.launch_type
-                    ? `https://api.spacexdata.com/v3/launches/` +
+                    ? process.env.REACT_APP_API_BASE_URL +
+                          `/` +
                           queryUrl.launch_type +
                           `/?&offset=0&order=launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}&orbit=${queryUrl.orbit}`
-                    : `https://api.spacexdata.com/v3/launches/?&offset=0&order=&launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}&orbit=${queryUrl.orbit}`
+                    : process.env.REACT_APP_API_BASE_URL +
+                          `/?&offset=0&order=&launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}&orbit=${queryUrl.orbit}`
             )
             .then((res) => {
                 if (res) {
@@ -219,10 +221,12 @@ const Dashboard = ({ launchDetails }) => {
         axios
             .get(
                 queryFilters.launch_type
-                    ? `https://api.spacexdata.com/v3/launches/` +
+                    ? process.env.REACT_APP_API_BASE_URL +
+                          `/` +
                           queryFilters.launch_type +
                           `/?&limit=10&offset=${queryFilters.offset}&order=launch_success=${queryFilters.launch_success}&start=${queryFilters.launchStartDateFilter}&end=${queryFilters.launchEndDateFilter}&orbit=${queryFilters.orbit}`
-                    : `https://api.spacexdata.com/v3/launches/?&limit=10&offset=${queryFilters.offset}&order=&launch_success=${queryFilters.launch_success}&start=${queryFilters.launchStartDateFilter}&end=${queryFilters.launchEndDateFilter}&orbit=${queryFilters.orbit}`
+                    : process.env.REACT_APP_API_BASE_URL +
+                          `/?&limit=10&offset=${queryFilters.offset}&order=&launch_success=${queryFilters.launch_success}&start=${queryFilters.launchStartDateFilter}&end=${queryFilters.launchEndDateFilter}&orbit=${queryFilters.orbit}`
             )
             .then((res) => {
                 if (res) {
@@ -294,10 +298,10 @@ const Dashboard = ({ launchDetails }) => {
     //         axios
     //             .get(
     //                 queryUrl.launch_type
-    //                     ? `https://api.spacexdata.com/v3/launches/` +
+    //                     ? process.env.REACT_APP_API_BASE_URL + `/` +
     //                           queryUrl.launch_type +
     //                           `/?&offset=0&order=launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}`
-    //                     : `https://api.spacexdata.com/v3/launches/?&offset=0&order=&launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}`
+    //                     : process.env.REACT_APP_API_BASE_URL + `/?&offset=0&order=&launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}`
     //             )
     //             .then((res) => {
     //                 if (res) {
