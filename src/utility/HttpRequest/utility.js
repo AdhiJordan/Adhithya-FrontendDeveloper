@@ -3,8 +3,6 @@ export function getEnv() {
         return 'development';
     } else if (window.origin === '') {
         return 'staging';
-    } else if (window.origin === '') {
-        return 'production';
     } else {
         return 'development';
     }

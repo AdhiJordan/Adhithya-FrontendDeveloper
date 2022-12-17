@@ -50,8 +50,6 @@ const Dashboard = ({ launchDetails }) => {
     const getInitialData = () => {
         dispatch(getLaunchList());
         //queryUrlParams(window.location.search);
-
-        //process.env.REACT_APP_API_BASE_URL
         axios
             .get(process.env.REACT_APP_API_BASE_URL + `/?&offset=0&order=`)
             .then((res) => {
@@ -260,69 +258,6 @@ const Dashboard = ({ launchDetails }) => {
         );
         dispatch(getQueryURL(queryUrl));
     }, [queryFilters]);
-
-    // const queryUrlParams = (windowUrl) => {
-    //     let url = windowUrl;
-    //     var queryparams = url.split('?')[1];
-    //     var params = queryparams.split('&');
-    //     var pair = null,
-    //         data = [];
-
-    //     params.forEach(function (d) {
-    //         pair = d.split('=');
-    //         data.push({ key: pair[0], value: pair[1] });
-    //     });
-
-    //     if (data) {
-    //         let queryUrl = {
-    //             limit: Number(data[0].value),
-    //             offset: Number(data[1].value),
-    //             launch_success: data[2].value && JSON.parse(data[2].value),
-    //             launch_type: data[3].value,
-    //             launchStartDateFilter: data[4].value,
-    //             launchEndDateFilter: data[5].value,
-    //         };
-    //         setPaginationIndex(Number(data[1].value));
-
-    //         setQueryFilters((queryFilters) => ({
-    //             ...queryFilters,
-    //             limit: queryUrl.limit,
-    //             offset: queryUrl.offset,
-    //             launch_success: queryUrl.launch_success,
-    //             launch_type: queryUrl.launch_type,
-    //             launchStartDateFilter: queryUrl.launchStartDateFilter,
-    //             launchEndDateFilter: queryUrl.launchEndDateFilter,
-    //         }));
-
-    //         dispatch(getLaunchByFiltersQuery(queryUrl));
-    //         axios
-    //             .get(
-    //                 queryUrl.launch_type
-    //                     ? process.env.REACT_APP_API_BASE_URL + `/` +
-    //                           queryUrl.launch_type +
-    //                           `/?&offset=0&order=launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}`
-    //                     : process.env.REACT_APP_API_BASE_URL + `/?&offset=0&order=&launch_success=${queryUrl.launch_success}&start=${queryUrl.launchStartDateFilter}&end=${queryUrl.launchEndDateFilter}`
-    //             )
-    //             .then((res) => {
-    //                 if (res) {
-    //                     setLaunchCount(res.data.length);
-    //                 }
-    //             });
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     if (launchDetails.queryUrl) {
-    //         queryUrlParams(launchDetails.queryUrl);
-    //         window.history.replaceState(
-    //             {
-    //                 foo: 'bar',
-    //             },
-    //             'Filters',
-    //             launchDetails.queryUrl
-    //         );
-    //     }
-    // }, []);
 
     return (
         <div>
